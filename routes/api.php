@@ -13,6 +13,17 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::post('login', 'AuthJWT\LoginController@login');
+Route::post('register', 'AuthJWT\RegisterController@register');
+
+Route::group(['middleware' => 'auth.jwt'], function () {
+    Route::post('logout', 'AuthJWT\LoginController@logout');
+/*
+    Route::get('tasks', 'TaskController@index');
+    Route::get('tasks/{id}', 'TaskController@show');
+    Route::post('tasks', 'TaskController@store');
+    Route::put('tasks/{id}', 'TaskController@update');
+    Route::delete('tasks/{id}', 'TaskController@destroy');*/
 });
+
+
