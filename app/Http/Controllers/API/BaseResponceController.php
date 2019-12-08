@@ -14,12 +14,14 @@ class BaseResponceController extends Controller
      */
     public function sendResponse($result, $message)
     {
-      $response = [
+        $response = [
             'success' => true,
             'data'    => $result,
             'message' => $message,
         ];
-        return response()->json($response, 200);
+        return response()->json($response, 200)->header('Access-Control-Allow-Origin', '*')
+                                               ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+                                               ->header('Access-Control-Allow-Headers', 'Content-Type');
     }
     /**
      * return error response.
@@ -28,14 +30,17 @@ class BaseResponceController extends Controller
      */
     public function sendError($error, $errorMessages = [], $code = 404)
     {
-      $response = [
+        $response = [
             'success' => false,
             'message' => $error,
         ];
         if(!empty($errorMessages)){
             $response['data'] = $errorMessages;
         }
-        return response()->json($response, $code);
+        return response()->json($response, $code)->header('Access-Control-Allow-Origin', '*')
+                                                 ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+                                                 ->header('Access-Control-Allow-Headers', 'Content-Type')
+                                                 ->header('Content-type', 'application/json');
     }
 
 }

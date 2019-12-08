@@ -18,12 +18,12 @@ Route::post('register', 'AuthJWT\RegisterController@register');
 
 Route::group(['middleware' => 'auth.jwt'], function () {
     Route::post('logout', 'AuthJWT\LoginController@logout');
-/*
-    Route::get('tasks', 'TaskController@index');
-    Route::get('tasks/{id}', 'TaskController@show');
-    Route::post('tasks', 'TaskController@store');
-    Route::put('tasks/{id}', 'TaskController@update');
-    Route::delete('tasks/{id}', 'TaskController@destroy');*/
+
+    Route::get('notes', 'API\NoteController@index');
+    Route::get('notes/{id}', 'API\NoteController@show');
+    Route::post('notes', 'API\NoteController@store');
+    Route::put('notes/{id}', 'API\NoteController@update');
+    Route::delete('notes/{id}', 'API\NoteController@destroy');
 });
 
 
