@@ -21,7 +21,7 @@ class NoteController extends BaseResponceController {
 
 
     public function index(){
-        $notes = $this->user->notes()->get(['id','title'])->toArray();
+        $notes = $this->user->notes()->get(['id','title','created_at'])->toArray();
         return $this->sendResponse($notes, 'OK');
     }
 
